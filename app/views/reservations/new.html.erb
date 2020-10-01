@@ -1,0 +1,38 @@
+<% if @reservation.restaurant %> <!--if it is nested desplay restaurnt name //@reservation.restaurant is for to sellect particular reservation -->
+<h1> Make new reservation in 
+<%= @reservation.restaurant.restaurant_name %>! Restaurant</h1>
+<% else %>
+<h1> New Reservation!</h1>
+<% end %>
+
+<%= render partial: "layouts/errors", locals: {object: @reservation} %>
+
+<%= form_for([@reservation.restaurant, @reservation]) do |f|%> 
+
+<% if !@reservation.restaurant %>
+  <%= f.label :restaurant %>
+  <%= f.collection_select :restaurant_id, Restaurant.all, :id, :restaurant_name %>
+<% else %>
+    <%= f.hidden_field :restaurant_id %> <!--if it is not selected from collection hidden_field will populate the restaurant_id -->
+<% end %>
+
+<br />
+<div>
+    <%= f.label :num_tables %>
+    <%= f.text_field :num_tables %>
+</div>
+
+<br/>
+<div>
+    <%= f.label :checkin_date %>
+    <%= f.text_field :checkin_date %>
+</div>
+
+<br/>
+
+<%= f.submit %>
+
+<% end %>
+
+
+

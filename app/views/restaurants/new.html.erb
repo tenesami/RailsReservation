@@ -1,0 +1,19 @@
+<h1> Add your Restaurants </h1>
+<%= form_for(@restaurant)  do |f|%>
+
+<%= render partial: "layouts/errors", locals: {object: @restaurant} %>
+
+<br/>
+<p>
+    <%= f.label :restaurant_name %>
+    <%= f.text_field :restaurant_name %>
+</p>
+
+<p>
+    <%= f.label :available_table %>
+    <%= f.text_field :available_table %>
+</p>
+
+<%= f.submit %>
+
+<% end %>

@@ -1,0 +1,17 @@
+<h1>Edit <%= @restaurant.restaurant_name%>!</h1>
+
+<%= render partial: "layouts/errors", locals: {object: @restaurant} %>
+
+<%= form_for(@restaurant) do |f|%>
+
+  <br>
+  <%= f.label :restaurant_name %>
+  <%= f.text_field :restaurant_name %>
+  <br></br>
+  <%= f.label :available_table %>
+  <%= f.text_area :available_table %>
+
+
+  <%= f.submit %>
+
+<% end %>

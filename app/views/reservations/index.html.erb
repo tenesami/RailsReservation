@@ -1,0 +1,21 @@
+<% if @restaurant %>
+<h1>Reservations for <%= @restaurant.restaurant_name %></h1>
+<% else %>
+<h1>All the Reservations </h1>   
+    
+<% end %>
+
+<ul>
+<% @reservations.each do |r|%>
+
+  <li><%= r.user.username%> reserves 
+    <%= r.num_tables%> tables in the: 
+    <strong>
+    <%= link_to r.restaurant.restaurant_name, 
+    restaurant_path(r.restaurant_id) %>
+    </strong>
+    restaurant
+   </li>
+<% end %>
+</ul>
+

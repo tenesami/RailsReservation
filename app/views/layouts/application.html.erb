@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RubyReservationApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+<!-- we use logout here b/c we need it to be accesseble every whare
+ logout is a mehtod of get doesn't help about the post so specifay  -->
+    <div>
+    <% if logged_in?%>
+     
+       
+      <%= link_to "Add Restaurant", new_restaurant_path%> |
+      <%= link_to "All Restaurants", restaurants_path%> |
+       <%= link_to "My Restaurants", user_restaurants_path(current_user) %> |
+      <%= link_to "Make Reservation", new_reservation_path%> |
+      <%= link_to "All Reservation", reservations_path %> |
+      <%= link_to "Home", user_path(current_user)%> |
+      <%= link_to "Logout", logout_path, method:"delete"%> 
+
+      <% else %>
+      <%=link_to "Sign Up", signup_path %> |
+      <%=link_to "Log In", login_path %> |
+      <%= link_to "Log In with Google", '/auth/google_oauth2', method: :post %>
+      <% end %>
+    </div>
+
+  <div>
+  <% if flash[:message] %>
+          <%= flash[:message]%>
+
+      <% end %>
+      <%= @error%>
+  </div>
+  
+  <body>
+    <%= yield %>
+  </body>
+</html>

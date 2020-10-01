@@ -1,0 +1,12 @@
+
+<h1>Reservation at <%= @reservation.restaurant.restaurant_name %></h1>
+<p>Reserved By: <%= @reservation.user.username %></p>
+<p>Number of tables reserved : <%= @reservation.num_tables %></p>
+
+<% if @reservation.user == current_user %>
+  <%= link_to "Edit Resevation", edit_reservation_path(@reservation)%>
+<% end %>
+
+
+
+

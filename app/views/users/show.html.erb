@@ -1,0 +1,7 @@
+Welcome <%= @user.username %> you are successfully login
+
+<%= display_restaurants %>
+
+<%= render partial: "restaurants/restaurants", locals: {restaurants: @user.restaurants} %>
+
+    

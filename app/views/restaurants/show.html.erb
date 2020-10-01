@@ -1,0 +1,36 @@
+
+<h2><%=@restaurant.restaurant_name%> Restaurant Add By: <%=link_to @restaurant.user.username, user_path(@restaurant.user)%> </h2>
+
+<div>Restaurant Name: <%= @restaurant.restaurant_name %></div>
+
+<div>Is Table Available? <%= @restaurant.available_table %></div>
+
+<p> <%=link_to 'Add new reservations', new_restaurant_reservation_path(@restaurant) %></p>
+
+
+<h4> Reservations </h4>
+<% @restaurant.reservations.each do |r| %> <!-- if your don't provide the agument it dose find from the current Url for the reservation if >
+                                               so current Url id is 1 it filled id as one reservation eventhough reservation id is 2 -->
+    <li><%= link_to "#{r.user.username} reserved #{@restaurant.restaurant_name}", reservation_path(@restaurant, r) %></li>
+<% end %>
+
+
+<% if @restaurant.user == current_user %>
+<h4><%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant)%></h4>
+<% end %>
+
+<% if !@restaurant.reservations.empty? %>
+  <p><%= link_to 'See all Reservatons', restaurant_reservations_path(@restaurant)%></p>
+  
+  <h4>Most Recent Reservatons:</h4>
+  <% @restaurant.reservations.last_7_reserved.each do |n|%>
+    <li>
+      <strong>
+      <%= n.user.username%>
+      </strong> reserves 
+      <%= link_to n.restaurant.restaurant_name, 
+      restaurant_reservation_path(@restaurant, n)%> 
+      at <%= n.updated_at.strftime("%I:%M %p on %m/%d/%Y") %>
+    </li>
+  <% end %>
+<% end %>

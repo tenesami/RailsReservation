@@ -1,0 +1,29 @@
+<h1> My Restaurants </h1>
+
+
+ <h3>Search by Restaurant Name</h3> 
+ 
+<%=form_tag(restaurants_path, method: :get) do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<br/>
+
+<% @restaurants.each do |r| %>
+    <h3>Reserve: <%= link_to r.restaurant_name, r %> Restaurant,  Availablity ...  
+    <%= r.available_table%> </h3>  <%= r.reservations.size %> times reserved  
+<% end %>
+
+<br>
+
+<% if @restaurants.blank? %>
+    <h2>No added restaurants yet. Add restaurants <%= link_to "here", new_restaurant_path%></h2>
+
+<% else %>
+  <%= render partial: "restaurants", locals: {restaurants: @restaurants} %>
+
+<% end %>
+
+
+
